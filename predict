@@ -1,0 +1,6 @@
+# Predicting failure probabilities
+df['Failure_Probability'] = model.predict_proba(X)[:, 1]
+
+# Sorting transformers based on their risk (higher probability of failure)
+at_risk_transformers = df[df['Failure_Probability'] > 0.5].sort_values(by='Failure_Probability', ascending=False)
+print(at_risk_transformers[['Transformer_ID', 'Failure_Probability']])
