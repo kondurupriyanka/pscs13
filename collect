@@ -1,0 +1,20 @@
+# Defining weights for each parameter
+weights = {
+    'Temperature': 0.3,
+    'Voltage': 0.2,
+    'Oil_Quality': 0.3,
+    'Load': 0.1,
+    'Transformer_Age': 0.1
+}
+
+# Normalizing values between 0 and 1 for HI calculation
+df['Health_Index'] = (
+    (1 - (df['Temperature'] - df['Temperature'].min()) / (df['Temperature'].max() - df['Temperature'].min())) * weights['Temperature'] +
+    (df['Voltage'] - df['Voltage'].min()) / (df['Voltage'].max() - df['Voltage'].min()) * weights['Voltage'] +
+    (df['Oil_Quality'] - df['Oil_Quality'].min()) / (df['Oil_Quality'].max() - df['Oil_Quality'].min()) * weights['Oil_Quality'] +
+    (1 - (df['Load'] - df['Load'].min()) / (df['Load'].max() - df['Load'].min())) * weights['Load'] +
+    (1 - (df['Transformer_Age'] - df['Transformer_Age'].min()) / (df['Transformer_Age'].max() - df['Transformer_Age'].min())) * weights['Transformer_Age']
+)
+
+# Health Index closer to 1 means better condition, closer to 0 means worse.
+print(df[['Transformer_ID', 'Health_Index']].head())
