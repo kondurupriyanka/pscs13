@@ -173,7 +173,15 @@ def get_weather_data(city):
     
     return response.json()
 
-7. Conclusion of the System
+7. Data Sources*
+
+- Crop data: You can collect crop data (soil conditions, diseases, yield) from agricultural departments, government databases, or weather APIs.
+- Disease Data: Organizations like ICAR or government agricultural agencies may provide disease-specific data for different crops.
+- Rainfall and Weather Data: Public APIs like OpenWeatherMap or government meteorological departments can provide real-time weather updates.
+
+
+
+8. Conclusion of the System
 
 -Data Storage: SQL database for storing and retrieving dynamic data related to crop yields.
 -Machine Learning: A Random Forest model (or another algorithm) to predict crop yield based on historical and real-time data.
