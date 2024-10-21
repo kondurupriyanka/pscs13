@@ -1,0 +1,31 @@
+python
+from flask import Flask, render_template, request
+
+app = Flask(_name_)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    crop_name = request.form['crop_name']
+    area = request.form['area']
+    soil_type = request.form['soil_type']
+    rainfall = float(request.form['rainfall'])
+    temperature = float(request.form['temperature'])
+    humidity = float(request.form['humidity'])
+    disease = request.form['disease']
+    
+    new_data = [soil_type, rainfall, temperature, humidity, disease]
+    yield_prediction = predict_yield(new_data)
+    harvest_suggestion = suggest_harvest_time(temperature, rainfall, disease, crop_name)
+    
+    insert_crop_data(crop_name, area, soil_type, rainfall, temperature, humidity, disease, yield_prediction)
+    
+    return f"Predicted Crop Yield: {yield_prediction} tons. Harvest Suggestion: {harvest_suggestion}"
+if _name_ == "_main_":
+    app.run(debug=True)
+
+
+This simple Flask app allows users to input data about their crops and receive predictions on yield and harvest suggestions.
